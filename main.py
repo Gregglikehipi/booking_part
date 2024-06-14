@@ -1,59 +1,61 @@
-from typing import Union
+from datetime import datetime
+from typing import Union, List, Optional
 from pydantic import BaseModel
 from fastapi import FastAPI
 
 
 class Hotel(BaseModel):
-    nm_id: int
-    name: str
-    name: str
-    brand: str
-    brand_id: int
-    site_brand_id: int
+    id: int
+    start: datetime
+    end: datetime
+
+
+class HotelList(BaseModel):
+    list: List[Hotel]
 
 
 class Transport(BaseModel):
-    nm_id: int
-    name: str
-    name: str
-    brand: str
-    brand_id: int
-    site_brand_id: int
+    id: int
 
 
-class HotelReq(BaseModel):
-    nm_id: int
-    name: str
-    name: str
-    brand: str
-    brand_id: int
-    site_brand_id: int
+class TransportList(BaseModel):
+    list: List[Transport]
 
 
-class TransportReq(BaseModel):
-    nm_id: int
-    name: str
-    name: str
-    brand: str
-    brand_id: int
-    site_brand_id: int
+class HotelReq(Hotel):
+    status: str
+
+
+class TransportReq(Transport):
+    status: str
+
+
+class HotelReqList(BaseModel):
+    list: List[HotelReq]
+
+
+class TransportReqList(BaseModel):
+    list: List[TransportReq]
+
+
+class UI(BaseModel):
+    user_id: int
+    order_id: int
+    hotels: Optional[HotelReqList] = []
+    transport: Optional[TransportReqList] = []
 
 
 app = FastAPI()
 
 
-@app.get("/ui_root")
-def ui_root(hotel: Hotel, transport: Transport):
-    return {"Name": hotel.name}
+@app.get("/api/ui_root")
+def ui_root(ui: UI):
+    data = dict(ui)
 
 
-@app.get("/transport_root")
-def transport_root():
-    return {"Hello": "World"}
+
+    return {"Name": data["user_id"]}
 
 
-@app.get("/hotel_root")
-def hotel_root():
-    return {"Hello": "World"}
 
 
