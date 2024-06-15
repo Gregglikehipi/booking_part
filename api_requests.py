@@ -1,24 +1,22 @@
 import requests
-import json
-
 
 #вернут статус на то могут ли они это забронировать
-def check_hotel_booking_available():
-    r = requests.get(f'http://api:80/get/{id}')
-    response = json.loads(r.text)
-    return response
+def check_hotel_booking_available(address, data):
+    response = requests.post("unknown", json=data)
+    return response.text
 
 #обращаемся чтобы они забронировали
-def api_add(id):
-    r = requests.post(f'http://api:80/add/{id}')
-    response = json.loads(r.text)
-    return response
+def book_hotel(address, data):
+    response = requests.post("unknown", json=data)
+    return response.text
 
 #просим забронировать транспорт какой-то
-def transport_book():
-    return
+def transport_book(data):
+    response = requests.post("http://api/v1/book", json=data)
+    return response.text
 
 #имитация отправки mock запроса
 def send_mock_cash():
-    r = requests
-    return
+    response = requests.get("https://mock.httpstatus.io/202")
+    return response.status_code
+
