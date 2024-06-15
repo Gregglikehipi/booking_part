@@ -41,8 +41,8 @@ class TransportReqList(BaseModel):
 class UI(BaseModel):
     user_id: int
     order_id: int
-    hotels: Optional[HotelReqList] = []
-    transport: Optional[TransportReqList] = []
+    hotels: Optional[HotelList] = []
+    transport: Optional[TransportList] = []
 
 
 app = FastAPI()
