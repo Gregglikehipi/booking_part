@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import Union, List, Optional
 from pydantic import BaseModel
 from fastapi import FastAPI
+from logic import confirm_all
 
 
 class Hotel(BaseModel):
@@ -51,10 +52,8 @@ app = FastAPI()
 @app.get("/api/ui_root")
 def ui_root(ui: UI):
     data = dict(ui)
-
-
-
-    return {"Name": data["user_id"]}
+    data_req = confirm_all(data)
+    return data_req
 
 
 

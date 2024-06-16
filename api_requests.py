@@ -5,13 +5,13 @@ import json
 #вернут статус на то могут ли они это забронировать
 def check_hotel_booking_available(address, data):
     response = requests.post("unknown", json=data)
-    return response.text
+    return json.loads(response.text)
 
 
 #обращаемся чтобы они забронировали
 def book_hotel(address, data):
     response = requests.post("unknown", json=data)
-    return response.text
+    return json.loads(response.text)
 
 
 #просим забронировать транспорт какой-то
