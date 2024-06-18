@@ -24,11 +24,10 @@ def confirm_hotel(data):
 
 
 def confirm_transport(data):
-    transports = without(data, "apartments")
-    transports = without(transports, "order_id")
+    transports_req = without(data, "apartments")
+    transports = without(transports_req, "order_id")
     transport_req = transport_book(transport_url, transports)
-    transports.update(transport_req)
-    return transports
+    return transports_req | transport_req
 
 
 def confirm_all(data):
@@ -47,5 +46,4 @@ def confirm_all(data):
             transport_status = 1
     if transport_status == 0 and hotel_status == 0:
         book_hotel(hotel_book, hotel)
-    hotel_req.update(transport_req)
-    return hotel_req
+    return hotel_req | transport_req
