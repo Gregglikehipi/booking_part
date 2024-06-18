@@ -93,7 +93,6 @@ data_transport = {
 #вернут статус на то могут ли они это забронировать
 def check_hotel_booking_available(address, data):
     if address == "unknown":
-        print(data_hotel)
         return data_hotel
     response = requests.post(address, json=data)
     return json.loads(response.text)
@@ -102,7 +101,7 @@ def check_hotel_booking_available(address, data):
 #обращаемся чтобы они забронировали
 def book_hotel(address, data):
     if address == "unknown":
-        print("hi")
+        hi = 0
     else:
         requests.post(address, json=data)
 

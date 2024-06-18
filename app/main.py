@@ -43,18 +43,16 @@ def ui_root(ui: UI):
     hotel_bool = False
     transport_bool = False
     if data["apartments"]:
-        #print(1) # <- Важная хуйня
         hotel_bool = True
     if data["route_ids"]:
-        #print(2) # <- Важная хуйня
         transport_bool = True
     if hotel_bool and transport_bool:
         data_req = confirm_all(data)
     if not hotel_bool and transport_bool:
         data_req = confirm_transport(data)
     if hotel_bool and not transport_bool:
-        #print(5) # <- Важная хуйня
         data_req = confirm_hotel(data)
+    print(data_req)
     return data_req
 
 

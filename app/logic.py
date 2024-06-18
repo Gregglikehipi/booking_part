@@ -1,8 +1,8 @@
 from app.api_requests import send_mock_cash, check_hotel_booking_available, transport_book, book_hotel
 
-hotel_check = "unknown"
-hotel_book = "unknown"
-transport_url = "unknown"
+hotel_check = "https://a0ec-213-209-148-4.ngrok-free.app/apartments/availability"
+hotel_book = "https://a0ec-213-209-148-4.ngrok-free.app/apartmants/booking"
+transport_url = "https://1edf-5-206-46-75.ngrok-free.app/api/v1"
 
 
 def without(d, key):
