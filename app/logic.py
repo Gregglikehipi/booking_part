@@ -13,14 +13,14 @@ def without(d, key):
 
 def confirm_hotel(data):
     hotel = without(data, "route_ids")
-    hotel_req = check_hotel_booking_available(hotel_check, hotel)
+    hotel["apartments"] = check_hotel_booking_available(hotel_check, hotel)
     hotel_status = 0
-    for apartment in hotel_req["apartments"]:
+    for apartment in hotel["apartments"]:
         if not apartment["status"]:
             hotel_status = 1
     if hotel_status == 0:
         book_hotel(hotel_book, hotel)
-    return hotel_req
+    return hotel
 
 
 def confirm_transport(data):
@@ -34,10 +34,10 @@ def confirm_all(data):
     hotel = without(data, "route_ids")
     transports = without(data, "apartments")
     transports = without(transports, "order_id")
-    hotel_req = check_hotel_booking_available(hotel_check, hotel)
+    hotel["apartments"] = check_hotel_booking_available(hotel_check, hotel)
     hotel_status = 0
     transport_status = 0
-    for apartment in hotel_req["apartments"]:
+    for apartment in hotel["apartments"]:
         if not apartment["status"]:
             hotel_status = 1
     transport_req = transport_book(transport_url, transports)
@@ -46,4 +46,4 @@ def confirm_all(data):
             transport_status = 1
     if transport_status == 0 and hotel_status == 0:
         book_hotel(hotel_book, hotel)
-    return hotel_req | transport_req
+    return hotel | transport_req

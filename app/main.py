@@ -7,8 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 class Hotel(BaseModel):
     id: int
-    start: datetime
-    end: datetime
+    start_date: datetime
+    end_date: datetime
 
 
 class UI(BaseModel):

@@ -89,6 +89,10 @@ data_transport = {
     "message": "ошибка бронирования некоторых рейсов"
 }
 
+def without(d, key):
+    new_d = d.copy()
+    new_d.pop(key)
+    return new_d
 
 #вернут статус на то могут ли они это забронировать
 def check_hotel_booking_available(address, data):
@@ -103,7 +107,13 @@ def book_hotel(address, data):
     if address == "unknown":
         hi = 0
     else:
-        requests.post(address, json=data)
+        di = {}
+        lity = []
+        for i in data["apartments"]:
+            i["person_id"] = 0
+            lity.append(i)
+        di["apartments"] = lity
+        requests.post(address, json=di)
 
 
 #просим забронировать транспорт какой-то
